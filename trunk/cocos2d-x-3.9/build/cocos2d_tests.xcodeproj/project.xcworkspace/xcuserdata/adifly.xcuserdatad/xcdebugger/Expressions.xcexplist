@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "UI_CLEANJOB::InitUI_CLEANJOBMAIN():UI_CleanJob.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "m_SpriteVectors.at(0)-&gt;at(0)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UI_CLEANJOB::BtnColorSetting(int, bool):UI_CleanJob.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "UI_CLEANJOB::saveSprite(int, int, cocos2d::Sprite*):UI_CleanJob.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "m_SpriteVectors.at(iPageTyep)-&gt;at(2)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

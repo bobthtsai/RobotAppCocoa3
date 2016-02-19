@@ -1,0 +1,70 @@
+description {
+ * The new interface is declared in this file. It consists of a few parts:
+ *
+ * #define'd interface code and name string
+ *
+ * These are used throughout the interface. Be careful not to conflict with
+ * existing Player interfaces when setting them.
+ *
+ * Message subtype codes
+ *
+ * These are used by both the client and the server to differentiate between
+ * different messages within the same type group (e.g. different types of data
+ * message).
+ *
+ * Message structures
+ *
+ * Each message structure defines the layout of data in the body of a message.
+ * One message structure can be used by multiple types and subtypes.
+ *
+ * Exported plugin interface function
+}
+
+
+/** Keypad data */
+message { DATA, STATE, 1, player_keypad_data_t };
+
+
+/** Request/reply subtype: set registration */
+message { REQ, SET_CONFIG, 1, player_keypad_config_t };
+message { REQ, GET_CONFIG, 2, player_keypad_config_t };
+
+
+
+/** key status */
+#define PLAYER_KEYPAD_KEY_PRESS                  1
+#define PLAYER_KEYPAD_KEY_RELEASE                2
+
+
+/** @brief Data: key (@ref PLAYER_KEYPAD_DATA_KEY)
+
+The basic key data packet.  */
+
+typedef struct player_keypad_data
+{
+  uint32_t timestamp;
+  uint8_t key;
+  uint8_t status;
+} player_keypad_data_t;
+
+
+/** @brief Request/reply: Get/set keypad properties.
+
+The keypad configuration (de-bounce, etc) can be queried by
+sending a null @ref PLAYER_KEYPAD_REQ_GET_CONFIG request and modified by
+sending a @ref PLAYER_KEYPAD_REQ_SET_CONFIG request.  In either case, the
+current configuration (after attempting any requested modification) will
+be returned in the response.  Read the documentation for your driver to
+determine what configuration values are permissible. */
+
+typedef struct player_keypad_config
+{
+  /** de-bunce time unit:ms */
+  uint32_t de_bounce; 
+} player_keypad_config_t;
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+/** Rtc Command */
+message { CMD, SET_TIME, 1, player_rtc_time_t };
+message { CMD, SET_ALARM, 2, player_rtc_alarm_t };
+
+/** Rtc data */
+message { DATA, TIME, 1, player_rtc_time_t };
+message { DATA, ALARM, 2, player_rtc_alarm_t };
+
+
+#define PLAYER_RTC_CLEAN_ALARM                   0
+#define PLAYER_RTC_KEEP_ALARM                    1
+
+typedef struct player_rtc_time
+{
+  /** rtc time unit:s utc only. */
+  uint32_t time;
+  /** minutes west of Greenwich. */
+  int32_t minuteswest;
+  /**type of DST correction. */
+  int32_t dsttime;
+} player_rtc_time_t;
+
+typedef struct player_rtc_alarm
+{
+  /** rtc time unit:s utc only. */
+  uint32_t time;
+   /** rtc is alarm . */
+  uint8_t is_alarm;
+} player_rtc_alarm_t;
+

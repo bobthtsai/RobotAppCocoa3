@@ -1,0 +1,31 @@
+下載完畢後
+1.開啟CMAKE 
+  1.1 先點選 第二選項 專案輸出目錄 指向 "RobotApp/trunk/build"
+  例如:V:/MSI_PCAPP/2015ROBOTAPP_GIT/RobotApp/trunk/build
+  1.2 修改第一選項 專案來源 指向 "RobotApp/trunk/player-git-svn"
+  例如: V:/MSI_PCAPP/2015ROBOTAPP_GIT/RobotApp/trunk/player-git-svn
+  1.3 選擇選單內 FILE->delete cache 刪除設定
+  1.4 點選畫面中 configure 按鍵 建立本機設定檔
+      (會開啟新畫面 記得點選Visual Studio 10 2010 後，按下finish)  
+  1.5  出現錯誤!請根據訊息修改設定 詳情可以參考"player3.0.2編譯說明.xlsx"
+     常見錯誤有:
+		phread 目錄沒有指定 解決:PTHREAD_DIR = "RobotApp/trunk/pthread"
+		PKG_CONFIG_EXE 沒有找到 解決:PKG_CONFIG_EXECUTABLE="C:\Python27\bin"
+        Boost 沒有找到 解決:  Boost_INCLUDE_DIR = "C:/boost_1_57_0"
+		Boost_USE_MULTITHREAD 沒有打勾
+  1.6 錯誤全部解決後(下方輸出出現 Configuring done) 點選 Generate 產生專案檔,
+2. 開啟專案 ROBOT_APP.sln，修改專案設定，詳情可見  "player3.0.2編譯說明.xlsx",下面為簡化敘述
+  2.1 點選有底線專案(ROBOT_APP 排除),在屬性中 指定輸出目錄 "$(SolutionDir)build\$(Configuration)\"
+  2.2 點選其他player 專案(無LIB開頭 無底線 ROBOT_APP排除)
+  指定輸出目錄  "$(SolutionDir)build\$(Configuration)\"
+  指定目標附檔名 組態類型 ".lib"
+  VC++ 目錄 指定 include 目錄 "$(SolutionDir)player-git-svn\;$(SolutionDir)include\;$(SolutionDir)player-git-svn\client_libs\;$(SolutionDir)build\;$(SolutionDir)player-git-svn\replace\;$(SolutionDir)player-git-svn\include\;$(SolutionDir)pthread\include\;$(SolutionDir)player-git-svn\libplayercommon;$(IncludePath)"
+  
+   VC++ 目錄 指定 程式庫目錄 "$(SolutionDir)build\$(Configuration)\;$(LibraryPath); $(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib"
+   
+   C/c++ 指定 其他目錄 "$(LocalDebuggerWorkingDirectory);$(SolutionDir)build\; $(SolutionDir)ROBOT_APP\; $(SolutionDir)build\client_libs\; C:\boost_1_57_0;%(AdditionalIncludeDirectories)"
+   
+   加入libzlib.lib (位於程式目錄下的ROBOT_APP)
+   
+   開始重建方案
+   

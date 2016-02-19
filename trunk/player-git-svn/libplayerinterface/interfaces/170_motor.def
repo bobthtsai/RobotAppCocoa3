@@ -1,0 +1,99 @@
+description {
+ * The new interface is declared in this file. It consists of a few parts:
+ *
+ * #define'd interface code and name string
+ *
+ * These are used throughout the interface. Be careful not to conflict with
+ * existing Player interfaces when setting them.
+ *
+ * Message subtype codes
+ *
+ * These are used by both the client and the server to differentiate between
+ * different messages within the same type group (e.g. different types of data
+ * message).
+ *
+ * Message structures
+ *
+ * Each message structure defines the layout of data in the body of a message.
+ * One message structure can be used by multiple types and subtypes.
+ *
+ * Exported plugin interface function
+}
+
+/** Data subtype: state */
+message { DATA, STATE, 1, player_motor_data_t };
+
+/** @brief Command: Open (@ref PLAYER_MOTOR_CMD_PWM)
+Tells the motor to move use PWM 100%~-100% */
+message { CMD, PWM, 1, player_motor_cmd_pwm_t };
+
+/** @brief Command: Open (@ref PLAYER_MOTOR_CMD_VELOCITY)
+Tells the motor to move use velocity RPM */
+message { CMD, VELOCITY, 2, player_motor_cmd_velocity_t };
+
+/** @brief Command: Open (@ref PLAYER_MOTOR_CMD_POSITION)
+Tells the motor to move use position deg */
+message { CMD, POSITION, 3, player_motor_cmd_position_t };
+
+/** @brief Command: Open (@ref PLAYER_MOTOR_CMD_DELTA_POSITION)
+Tells the motor to move use position delta deg */
+message { CMD, DELTA_POSITION, 4, player_motor_cmd_delta_position_t };
+
+
+/** Motor state: stop */
+#define PLAYER_MOTOR_STATE_STOP                  1
+/** Motor state: moving */
+#define PLAYER_MOTOR_STATE_MOVING                2
+/** Motor state: error */
+#define PLAYER_MOTOR_STATE_ERROR                 3
+
+
+/** @brief Data: state (@ref PLAYER_MOTOR_DATA_STATE)
+The @p motor interface returns the current state of the motor
+and information on a potential object in the motor.
+state may be @ref PLAYER_MOTOR_STATE_STOP, @ref PLAYER_MOTOR_STATE_MOVING,
+@ref PLAYER_MOTOR_STATE_ERROR.
+beams provides information on how far into the motor an object is. For most
+motor, this will be a bit mask, with each bit representing whether a beam
+has been interrupted or not.
+*/
+typedef struct player_motor_data
+{
+  /** The motor's state */
+  uint8_t state;
+  /** The current<A> of the object in the motor */
+  float current;
+  /** estimated current energy consumption (negative values) or
+      aquisition (positive values) [W]. */
+  float watts;
+  /** The rpm of the object in the motor */
+  float rpm;
+  /** The position of the object in the motor */
+  float position;  
+} player_motor_data_t;
+
+
+typedef struct player_motor_cmd_pwm
+{
+  float pwm;
+} player_motor_cmd_pwm_t;
+
+typedef struct player_motor_cmd_velocity
+{
+  float velocity;  ///r.p.m
+  float acceleration;
+} player_motor_cmd_velocity_t;
+
+typedef struct player_motor_cmd_position
+{
+  float velocity;
+  float acceleration;
+  float position;
+} player_motor_cmd_position_t;
+
+typedef struct player_motor_cmd_delta_position
+{
+  float velocity;
+  float acceleration;
+  float deltaPosition;
+} player_motor_cmd_delta_position_t;

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ROBOT_APP\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\HelloWorldScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_RobotMain.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_RobotRemote.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_RobotScanning.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\WifiScan.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_MAP.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_CleanJob.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_Reservation.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_RobotSetup.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\Ini.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\MAP_Function.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\player.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\UI_commonFun.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ROBOT_APP\Classes\Coco2dDialog.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ROBOT_APP\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\AppMacros.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\HelloWorldScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\ImageList.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_RobotMain.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_RobotRemote.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_RobotScanning.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\WifiScan.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_MAP.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_commonFun.h" />
+    <ClInclude Include="ROBOT_APP\Classes\UI_CleanJob.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_Reservation.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\UI_RobotSetup.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\Ini.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\MAP_Function.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\dbg.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\player.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ROBOT_APP\Classes\Coco2dDialog.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ROBOT_APP\ROBOT_APP.rc" />
+  </ItemGroup>
+</Project>

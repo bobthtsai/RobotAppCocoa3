@@ -1,0 +1,440 @@
+description {
+ * The new interface is declared in this file. It consists of a few parts:
+ *
+ * #define'd interface code and name string
+ *
+ * These are used throughout the interface. Be careful not to conflict with
+ * existing Player interfaces when setting them.
+ *
+ * Message subtype codes
+ *
+ * These are used by both the client and the server to differentiate between
+ * different messages within the same type group (e.g. different types of data
+ * message).
+ *
+ * Message structures
+ *
+ * Each message structure defines the layout of data in the body of a message.
+ * One message structure can be used by multiple types and subtypes.
+ *
+ * Exported plugin interface function
+}
+/** Dispatcher Command */
+message { CMD, AI, 1, player_dispatcher_ai_cmd_data_t };   ///UI->Ai
+message { CMD, PM, 2, player_dispatcher_pm_cmd_data_t };   ///AI->PM
+message { CMD, SET_UI_TIME, 3, player_dispatcher_ui_time_t };   ///RD->UI
+message { CMD, SET_UI_SCHEDULE, 4, player_dispatcher_ui_schedule_t };   ///RD->UI
+message { CMD, REQ_UI_TIME, 5, player_dispatcher_ui_time_t };  ///RD->UI
+message { CMD, REQ_UI_SCHEDULE, 6, player_dispatcher_ui_schedule_t };   ///RD->UI
+message { CMD, REQ_ACK_UI_TIME, 7, player_dispatcher_ui_time_t };  ///RD<-UI
+message { CMD, REQ_ACK_UI_SCHEDULE, 8, player_dispatcher_ui_schedule_t };   ///RD<-UI
+message { CMD, UI, 9, player_dispatcher_ui_cmd_data_t };   ///RD->UI
+message { CMD, SET_UI_NAME, 10, player_dispatcher_ui_name_t };   ///RD->UI
+message { CMD, REQ_UI_NAME, 11, player_dispatcher_ui_name_t };  ///RD->UI
+message { CMD, REQ_ACK_UI_NAME, 12, player_dispatcher_ui_name_t };  ///RD<-UI
+message { CMD, AI_STATUS, 13, player_dispatcher_ai_status_t };
+message { CMD, PM_STATUS, 14, player_dispatcher_pm_status_t };
+message { CMD, UI_STATUS, 15, player_dispatcher_ui_status_t };
+message { CMD, TICK, 16, player_dispatcher_tick_t };
+
+/** Dispatcher data */
+message { DATA, AI, 1, player_dispatcher_ai_cmd_data_t };
+message { DATA, PM, 2, player_dispatcher_pm_cmd_data_t };
+message { DATA, SET_UI_TIME, 3, player_dispatcher_ui_time_t };
+message { DATA, SET_UI_SCHEDULE, 4, player_dispatcher_ui_schedule_t };
+message { DATA, REQ_UI_TIME, 5, player_dispatcher_ui_time_t };
+message { DATA, REQ_UI_SCHEDULE, 6, player_dispatcher_ui_schedule_t };
+message { DATA, REQ_ACK_UI_TIME, 7, player_dispatcher_ui_time_t };
+message { DATA, REQ_ACK_UI_SCHEDULE, 8, player_dispatcher_ui_schedule_t };
+message { DATA, STATUS, 9, player_dispatcher_status_t };
+message { DATA, UI, 10, player_dispatcher_ui_cmd_data_t };   ///RD->UI
+message { DATA, SET_UI_NAME, 11, player_dispatcher_ui_name_t };
+message { DATA, REQ_UI_NAME, 12, player_dispatcher_ui_name_t };
+message { DATA, REQ_ACK_UI_NAME, 13, player_dispatcher_ui_name_t };
+message { DATA, AI_STATUS, 14, player_dispatcher_ai_status_t };
+message { DATA, PM_STATUS, 15, player_dispatcher_pm_status_t };
+message { DATA, UI_STATUS, 16, player_dispatcher_ui_status_t };
+
+
+/** Request/reply subtype: set registration */
+message { REQ, SET_FILE, 7, player_dispatcher_file_t };
+message { REQ, GET_FILE, 8, player_dispatcher_file_t };
+message { REQ, PAIRING, 9, player_dispatcher_mac_t };   ///RD->dispatcher  UI->Dispatcher
+message { REQ, LOGIN, 10, player_dispatcher_mac_t };   ///RD->dispatcher
+message { REQ, LOGOUT, 11, player_dispatcher_mac_t };   ///RD->dispatcher
+
+
+
+
+/** Initiator/Destination Definition */
+#define PLAYER_DISPATCH_INIT_DEST_AI             0x00000001  //AI client
+#define PLAYER_DISPATCH_INIT_DEST_PM             0x00000002  //Power manage client
+#define PLAYER_DISPATCH_INIT_DEST_UI             0x00000004  //User interface client
+#define PLAYER_DISPATCH_INIT_DEST_RD             0x00000008  //Remote device client
+#define PLAYER_DISPATCH_INIT_DEST_DIS             0x00000010  //dispatcher plug-in 
+
+typedef struct player_dispatcher_init_des_header
+{
+  /** cmd initiator. */
+  uint8_t initiator;
+  /** cmd destination. */ 
+  uint8_t destination; 
+} player_dispatcher_init_des_header_t;
+
+
+
+/** robot error state*/
+#define PLAYER_DISPATCH_NO_ERROR                           0
+
+/* [1xx] battery & charging */
+#define PLAYER_DISPATCH_NO_BATTERY_ERROR                   100
+#define PLAYER_DISPATCH_BATTERY_OVER_HEAT_ERROR            101
+#define PLAYER_DISPATCH_CHARGING_TIMEOUT_ERROR             102
+#define PLAYER_DISPATCH_CHARGING_ERROR                     103
+
+/* [2xx] Front side sensor */
+#define PLAYER_DISPATCH_FORWARD_CLIFF_ERROR                200
+#define PLAYER_DISPATCH_MAINBRUSH_OC_ERROR                 201
+#define PLAYER_DISPATCH_MAINBRUSH_CIRCUIT_ERROR            202
+#define PLAYER_DISPATCH_MAINBRUSH_QEP_ERROR                203
+
+/* [3xx] Left side sensor */
+#define PLAYER_DISPATCH_FORWARD_LEFT_CLIFF_ERROR           300
+#define PLAYER_DISPATCH_REAR_LEFT_CLIFF_ERROR              301
+#define PLAYER_DISPATCH_LEFT_BUMPER_ERROR                  302
+#define PLAYER_DISPATCH_LEFT_SIDEBRUSH_OC_ERROR            303
+#define PLAYER_DISPATCH_LEFT_SIDEBRUSH_CIRCUIT_ERROR       304
+#define PLAYER_DISPATCH_LEFT_SIDEBRUSH_QEP_ERROR           305
+#define PLAYER_DISPATCH_LEFT_WHEEL_OC_ERROR                306
+#define PLAYER_DISPATCH_LEFT_WHEEL_CIRCUIT_ERROR           307
+#define PLAYER_DISPATCH_LEFT_WHEEL_QEP_ERROR               308
+#define PLAYER_DISPATCH_LEFT_WHEEL_DROP_ERROR              309
+
+/* [4xx] Right side sensor */
+#define PLAYER_DISPATCH_FORWARD_RIGHT_CLIFF_ERROR          400
+#define PLAYER_DISPATCH_REAR_RIGHT_CLIFF_ERROR             401
+#define PLAYER_DISPATCH_RIGHT_BUMPER_ERROR                 402
+#define PLAYER_DISPATCH_RIGHT_SIDEBRUSH_OC_ERROR           403
+#define PLAYER_DISPATCH_RIGHT_SIDEBRUSH_CIRCUIT_ERROR      404
+#define PLAYER_DISPATCH_RIGHT_SIDEBRUSH_QEP_ERROR          405
+#define PLAYER_DISPATCH_RIGHT_WHEEL_OC_ERROR               406
+#define PLAYER_DISPATCH_RIGHT_WHEEL_CIRCUIT_ERROR          407
+#define PLAYER_DISPATCH_RIGHT_WHEEL_QEP_ERROR              408
+#define PLAYER_DISPATCH_RIGHT_WHEEL_DROP_ERROR             409
+
+/* [5xx] Other sensors */
+#define PLAYER_DISPATCH_BIN_ERROR                          500
+#define PLAYER_DISPATCH_BINFULL_ERROR                      501
+#define PLAYER_DISPATCH_BIN_COVER_ERROR                    502
+#define PLAYER_DISPATCH_DUSTSENSOR_ERROR                   503
+#define PLAYER_DISPATCH_MORE_CLIFF_ERROR                   504
+#define PLAYER_DISPATCH_KIDNAPP_ERROR                      505
+
+/* [6xx] Laser sensor */
+#define PLAYER_DISPATCH_LASER_IMAGE_SENSOR_ERROR           600
+#define PLAYER_DISPATCH_LASER_MOTOR_ERROR                  601
+#define PLAYER_DISPATCH_LASER_CIRCUIT_ERROR                602
+#define PLAYER_DISPATCH_LASER_DIODE_ERROR                  603
+
+/* [9xx] Boot sensors */
+#define PLAYER_DISPATCH_BOOT_FORWARD_CLIFF_ERROR           901
+#define PLAYER_DISPATCH_BOOT_FORWARD_LEFT_CLIFF_ERROR      902
+#define PLAYER_DISPATCH_BOOT_FORWARD_RIGHT_CLIFF_ERROR     903
+#define PLAYER_DISPATCH_BOOT_REAR_LEFT_CLIFF_ERROR         904
+#define PLAYER_DISPATCH_BOOT_REAR_RIGHT_CLIFF_ERROR        905
+#define PLAYER_DISPATCH_BOOT_LEFT_BUMPER_ERROR             906
+#define PLAYER_DISPATCH_BOOT_RIGHT_BUMPER_ERROR            907
+#define PLAYER_DISPATCH_BOOT_BIN_ERROR                     908
+#define PLAYER_DISPATCH_BOOT_BIN_COVER_ERROR               909
+#define PLAYER_DISPATCH_BOOT_LEFT_WHEEL_DROP_ERROR         910
+#define PLAYER_DISPATCH_BOOT_RIGHT_WHEEL_DROP_ERROR        911
+
+
+
+
+/** robot worry state*/
+#define PLAYER_DISPATCH_NO_WORRY                           0x00000000
+#define PLAYER_DISPATCH_BATTERY_LOW_WORRY                  0x00000001
+#define PLAYER_DISPATCH_DUST_SENSOR_WORRY                  0x00000002
+#define PLAYER_DISPATCH_BINFULL_WORRY                      0x00000004
+#define PLAYER_DISPATCH_GET_LOST_WORRY                     0x00000008
+
+
+
+
+
+/** AI receive command &  AI state*/
+#define PLAYER_DISPATCH_AI_SLEEP                                               2
+#define PLAYER_DISPATCH_AI_STANDBY                                             3
+#define PLAYER_DISPATCH_AI_MOVE_FORWARD                                        14
+#define PLAYER_DISPATCH_AI_MOVE_FORWARD_SLOW                                   15
+#define PLAYER_DISPATCH_AI_MOVE_MOVE_BACKWARD                                  16
+#define PLAYER_DISPATCH_AI_TURN_LEFT                                           17
+#define PLAYER_DISPATCH_AI_TURN_RIGHT                                          18
+#define PLAYER_DISPATCH_AI_STOP                                                19
+#define PLAYER_DISPATCH_AI_STOP_NOW                                            20
+#define PLAYER_DISPATCH_AI_AUTO                                                21
+#define PLAYER_DISPATCH_AI_SPIRAL_SMALL                                        22
+#define PLAYER_DISPATCH_AI_SPIRAL_LARGE                                        23
+#define PLAYER_DISPATCH_AI_PCI_STILL                                           24
+#define PLAYER_DISPATCH_AI_FIND_DOCK                                           25
+#define PLAYER_DISPATCH_AI_WALL_FOLLOW                                         26
+#define PLAYER_DISPATCH_AI_WALL_FOLLOW_FIND_DOCK             27
+#define PLAYER_DISPATCH_AI_AVOID                             28
+#define PLAYER_DISPATCH_AI_ESCAPE                            29
+#define PLAYER_DISPATCH_AI_CALIBRATION                       30   ///re-calibration sensor
+#define PLAYER_DISPATCH_AI_PLANNER                           31
+#define PLAYER_DISPATCH_AI_ALGORITHM_TASK                    32
+
+#define PLAYER_DISPATCH_AI_MOVE2TARGET                                         100           
+#define PLAYER_DISPATCH_AI_EXPLORE                                             101
+#define PLAYER_DISPATCH_AI_MULTI_ZONE                        102
+#define PLAYER_DISPATCH_AI_CORNER                                              103
+#define PLAYER_DISPATCH_AI_DEEP_CLEAN                                          104
+#define PLAYER_DISPATCH_AI_CARPET_CLEAN                                        105
+
+#define PLAYER_DISPATCH_AI_EXAMPLE                           200
+
+#define PLAYER_DISPATCH_AI_RESET_ERROR                                         300
+#define PLAYER_DISPATCH_AI_RESET_SLAM_MAP                    301
+#define PLAYER_DISPATCH_AI_ENABLE_DISABLE_DEBUG_MESSAGE      302
+#define PLAYER_DISPATCH_AI_ENABLE_DISABLE_WAYPOINTS          303
+#define PLAYER_DISPATCH_AI_REAL_TIME_TRAJECTORY              304
+#define PLAYER_DISPATCH_AI_REAL_TIME_OBSTACLE_MAP            305
+
+/** AI stop condition*/
+#define PLAYER_DISPATCH_AI_COND_JOB_DONE                                       1                                  
+#define PLAYER_DISPATCH_AI_COND_OTHER_JOB_IN                                   2    
+
+
+
+/** AI & PM clean power command/ AI & PM power state*/
+#define PLAYER_DISPATCH_PM_AUTO                  3
+#define PLAYER_DISPATCH_PM_TURBO                 4
+#define PLAYER_DISPATCH_PM_NORMAL                5
+#define PLAYER_DISPATCH_PM_WALK                  6
+#define PLAYER_DISPATCH_PM_TURBO_AIR_CLEAN       7
+#define PLAYER_DISPATCH_PM_NORMAL_AIR_CLEAN      8
+#define PLAYER_DISPATCH_PM_STANDBY               9
+#define PLAYER_DISPATCH_PM_DEEP_CLEAN            10
+#define PLAYER_DISPATCH_PM_CARPET_CLEAN          11
+#define PLAYER_DISPATCH_PM_VERY_LOW_POWER        50
+#define PLAYER_DISPATCH_PM_SLEEP                 51
+#define PLAYER_DISPATCH_PM_ON_CHARGER            52
+#define PLAYER_DISPATCH_PM_CHARGE                53
+#define PLAYER_DISPATCH_PM_CHARGE_FULL           54
+
+
+
+typedef struct player_dispatcher_ai_job
+{
+  uint32_t cmd;    /// AI behavior cmd.
+  uint32_t power;    /// robot power.
+  uint32_t map_index_count;  ///The number of map index
+  uint32_t *map_index;  ///need to reference which index of map layer
+  player_pose2d_t target_point;  //the robot target point
+  uint32_t name_count;  ///The number of name length
+  int8_t *name;  ///the name of alarm job 
+  uint32_t data_count;  ///The number of data length
+  int8_t *data;  ///The data length
+  uint32_t stop_cond;  ///how to judge stop of one job
+} player_dispatcher_ai_job_t;
+
+typedef struct player_dispatcher_ai_cmd_data
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  player_dispatcher_ai_job_t job;
+} player_dispatcher_ai_cmd_data_t;
+
+typedef struct player_dispatcher_ai_status
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t status;  ///AI status.
+  uint32_t power;  ///AI power state.
+  uint32_t error;  ///error.
+  uint32_t worry;  /// worry.
+} player_dispatcher_ai_status_t;
+
+typedef struct player_dispatcher_pm_cmd_data
+{
+  /** data initiator and destination information. */
+  player_dispatcher_init_des_header_t init_des;
+  /** Power manage  cmd. */
+  uint32_t cmd;
+} player_dispatcher_pm_cmd_data_t;
+
+typedef struct player_dispatcher_pm_status
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t status;  ///Power manage status.
+  uint32_t error;  /// error.
+} player_dispatcher_pm_status_t;
+
+
+/** UI state <1>*/
+#define PLAYER_DISPATCH_UI_SLEEP                                               0x00000002
+#define PLAYER_DISPATCH_UI_POWER_ON                                            0x00000003
+#define PLAYER_DISPATCH_UI_POWER_OFF                                           0x00000004
+#define PLAYER_DISPATCH_UI_STANDBY                                             0x00000005
+#define PLAYER_DISPATCH_UI_CLEAN                                               0x00000006
+#define PLAYER_DISPATCH_UI_DEMO                                                0x00000007
+#define PLAYER_DISPATCH_UI_ERROR                                               0x00000008
+#define PLAYER_DISPATCH_UI_CHARGING                                            0x00000009
+#define PLAYER_DISPATCH_UI_LOGIN                                               0x00000010
+
+#define PLAYER_DISPATCH_UI_SETTING                                             0x00000020
+#define PLAYER_DISPATCH_UI_CHARACTER_SETUP                                     0x00000021
+#define PLAYER_DISPATCH_UI_NAME_SETUP                                          0x00000022
+#define PLAYER_DISPATCH_UI_ODOR_SETUP                                          0x00000023
+#define PLAYER_DISPATCH_UI_USB_UPGRADE                                         0x00000024
+#define PLAYER_DISPATCH_UI_RTC_SETUP                                           0x00000025
+#define PLAYER_DISPATCH_UI_SCHEDULE_SETUP                                      0x00000026
+#define PLAYER_DISPATCH_UI_NIGHT_CHARGE_SETUP                                  0x00000027
+#define PLAYER_DISPATCH_UI_VOICE_SETUP                                         0x00000028
+#define PLAYER_DISPATCH_UI_COCORO_SETUP                                        0x00000029
+#define PLAYER_DISPATCH_UI_NOTICE_SETUP                                        0x00000030
+#define PLAYER_DISPATCH_UI_VACUUM_SETUP                                        0x00000031
+#define PLAYER_DISPATCH_UI_BIRTHDAY_SETUP                                      0x00000032
+#define PLAYER_DISPATCH_UI_SOUND_SETUP                                         0x00000033
+#define PLAYER_DISPATCH_UI_WLAN_ON_OFF_SETUP                                   0x00000034
+#define PLAYER_DISPATCH_UI_WLAN_SETUP                                          0x00000035
+#define PLAYER_DISPATCH_UI_WLAN_SETUP_AUTO                                     0x00000036
+#define PLAYER_DISPATCH_UI_WLAN_SETUP_WPS                                      0x00000037
+#define PLAYER_DISPATCH_UI_WLAN_SETUP_DIRECT                                   0x00000038
+#define PLAYER_DISPATCH_UI_WLAN_SETUP_PAIRING                                  0x00000039
+#define PLAYER_DISPATCH_UI_VOICE_RECOGNIZE_ON_OFF_SETUP                        0x00000040
+#define PLAYER_DISPATCH_UI_RESET_SETUP                                         0x00000041
+
+/** UI state <2> it can be use as PLAYER_DISPATCH_UI_CLEAN+PLAYER_DISPATCH_UI_ALARM*/
+#define PLAYER_DISPATCH_UI_ALARM                                               0x00001000 
+
+typedef struct player_dispatcher_ui_status
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t status;   /// UI status.
+} player_dispatcher_ui_status_t;
+
+typedef struct player_dispatcher_time
+{
+  uint8_t tm_sec;    ///Seconds.    [0-59] (1 leap second)
+  uint8_t tm_min;    ///Minutes.    [0-59]
+  uint8_t tm_hour;   ///Hours.  [0-23]
+  uint8_t tm_mday;    ///Day.        [1-31]
+  uint8_t tm_mon;  ///Month.    [1-12] 
+  uint16_t tm_year;  ///Year    1900~2014 etc...
+} player_dispatcher_time_t;
+
+typedef struct player_dispatcher_timezone
+{
+  int32_t minuteswest;     /// minutes west of Greenwich
+  int32_t dsttime;         /// type of DST correction
+} player_dispatcher_timezone_t;
+
+typedef struct player_dispatcher_ui_time
+{
+  /** data initiator and destination information. */
+  player_dispatcher_init_des_header_t init_des;
+  player_dispatcher_time_t data;
+  player_dispatcher_timezone_t zone;
+} player_dispatcher_ui_time_t;
+
+//the schedule type
+#define PLAYER_DISPATCH_UI_NO_ALARM              -1
+#define PLAYER_DISPATCH_UI_ONCE_ALARM            0
+#define PLAYER_DISPATCH_UI_DAILY_ARMARM          86400  ///60*60*24 one day seconds
+#define PLAYER_DISPATCH_UI_WEEKLY_ARMARM         604800  ///one week seconds 
+#define PLAYER_DISPATCH_UI_PER_YEAR_ALARM        31536000  ///one year seconds
+
+//the schedule play type 
+#define PLAYER_DISPATCH_UI_SUSPEND_ALARM         0
+#define PLAYER_DISPATCH_UI_RESUME_ALARM          1
+
+typedef struct player_dispatcher_ui_alarm_time
+{
+  uint8_t uuid[8];  ///the unique serial number 6bytes+2bytes 6bytes are MAC 2bytes are unique number
+  int32_t type;  ///the schedule type
+  uint8_t play_type;  ///the schedule play type 
+  player_dispatcher_time_t time;  ///The schedule time
+  player_dispatcher_timezone_t zone;
+  player_dispatcher_ai_job_t job;
+} player_dispatcher_ui_alarm_time_t;
+
+typedef struct player_dispatcher_ui_schedule
+{
+  /** data initiator and destination information. */
+  player_dispatcher_init_des_header_t init_des;
+  uint32_t data_count;  ///The number of schedule
+  player_dispatcher_ui_alarm_time_t *data;  ///The schedule data 
+} player_dispatcher_ui_schedule_t;
+
+
+
+
+
+
+typedef struct player_dispatcher_ack
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t result;  /// data result.
+} player_dispatcher_ack_t;
+
+typedef struct player_dispatcher_mac
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t mac_count;  ///The number of mac data length
+  uint8_t *mac;  ///The mac data
+  uint32_t result;  ///The result
+} player_dispatcher_mac_t;
+
+typedef struct player_dispatcher_file
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t name_count;  ///The number of name length
+  uint8_t *name;  ///The name data
+  uint32_t data_count;   //The file data number unit: byte
+  uint8_t *data;
+} player_dispatcher_file_t;
+
+
+
+
+typedef struct player_dispatcher_status
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  int8_t login;  ///The login status     login:1 logout:0
+  int8_t pairing;  ///The pairing status      not at pairing:0 pairing success:1 pairing failure:-1
+} player_dispatcher_status_t;
+
+
+
+
+/** UI command */
+#define PLAYER_DISPATCH_UI_SWITCH_AP_MODE        1
+#define PLAYER_DISPATCH_UI_SWITCH_CLIENT_MODE    2
+typedef struct player_dispatcher_ui_cmd_data
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t cmd;   ///UI  cmd.
+} player_dispatcher_ui_cmd_data_t;
+
+
+
+/** UI robot name */
+typedef struct player_dispatcher_ui_name
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+  uint32_t name_count;  ///The number of name length
+  uint8_t *name;  ///The name data
+} player_dispatcher_ui_name_t;
+
+
+
+
+
+
+/** remote device need to tick the robot every second if robot not receive tick over some times 
+robot will logout remote device */
+typedef struct player_dispatcher_tick
+{
+  player_dispatcher_init_des_header_t init_des;  /// data initiator and destination information.
+} player_dispatcher_tick_t;

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:cocos2d-x-3.9/build"
+      name = "PCAPP">
+      <FileRef
+         location = "group:../../ROBOT_APP/main.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/main.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/AppDelegate.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/AppDelegate.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/AppMacros.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/Coco2dDialog.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/Coco2dDialog.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/dbg.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/HelloWorldScene.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/HelloWorldScene.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/ImageList.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/Ini.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/Ini.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/MAP_Function.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/MAP_Function.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/player.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/player.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_CleanJob.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_CleanJob.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_commonFun.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_commonFun.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_MAP.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_MAP.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_Reservation.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_Reservation.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotMain.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotMain.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotRemote.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotRemote.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotScanning.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotScanning.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotSetup.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_RobotSetup.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_SAMPLE.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/UI_SAMPLE.h">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/WifiScan.cpp">
+      </FileRef>
+      <FileRef
+         location = "group:../../ROBOT_APP/Classes/WifiScan.h">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "container:cocos2d-x-3.9/build/cocos2d_tests.xcodeproj">
+   </FileRef>
+</Workspace>
